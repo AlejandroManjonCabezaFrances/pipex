@@ -6,7 +6,7 @@
 #    By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 09:03:02 by amanjon-          #+#    #+#              #
-#    Updated: 2023/08/25 14:07:52 by amanjon-         ###   ########.fr        #
+#    Updated: 2023/08/31 12:27:56 by amanjon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I /libft/ft_printf/include -I /libft/gnl/include -I /libft/Libft/include
 DEBUG =#-g3 -fsanitize=address
 RM = rm -f
-SRC = main.c
+SRC = main.c command.c
 
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a

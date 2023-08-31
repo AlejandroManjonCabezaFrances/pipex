@@ -6,7 +6,7 @@
 /*   By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:29:49 by amanjon-          #+#    #+#             */
-/*   Updated: 2023/08/31 07:42:58 by amanjon-         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:56:34 by amanjon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ typedef struct s_process
 void	ft_error(char *word); */
 void	ft_open_files(char **argv, t_process *process);
 char	*ft_get_path(char **env);
-void	ft_comand_child1(t_process *process, char **argv, char **env);
-void	ft_comand_child2(t_process *process, char **argv, char **env);
+void	ft_comand_child1(t_process process, char **argv, char **env);
+void	ft_comand_child2(t_process process, char **argv, char **env);
 char	*ft_get_command(char **path, char *cmd);
 void	ft_free_childs(t_process *process);
 void	ft_free_father(t_process *process);
 int		ft_check_command(char *cmd);
+void	ft_commands_childs(t_process process, char **argv, char **env);
 
 #endif
