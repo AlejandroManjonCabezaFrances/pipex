@@ -6,7 +6,7 @@
 /*   By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 12:50:28 by amanjon-          #+#    #+#             */
-/*   Updated: 2023/08/31 12:52:48 by amanjon-         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:57:19 by amanjon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_open_files(char **argv, t_process *process)
 	if (access(argv[1], R_OK) < 0)
 	{
 		perror(argv[1]);
-		exit(STDERR_FILENO);
+		exit(1);
 	}
 	if (process->infile < 0)
 	{
@@ -80,10 +80,11 @@ void	ft_open_files(char **argv, t_process *process)
 		exit(1);
 	}
 }
-/* void	leaks(void)
+
+void	leaks(void)
 {
 	system("leaks -q pipex");
-} */
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -98,6 +99,9 @@ int	main(int argc, char **argv, char **env)
 	ft_commands_childs(process, argv, env);
 	close(process.fd[WRITE]);
 	close(process.fd[READ]);
+	
+	atexit(leaks);
+
 	waitpid(process.pid1, NULL, 0);
 	waitpid(process.pid2, NULL, 0);
 	ft_free_father(&process);
