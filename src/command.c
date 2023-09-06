@@ -6,7 +6,7 @@
 /*   By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 12:27:09 by amanjon-          #+#    #+#             */
-/*   Updated: 2023/09/04 15:30:36 by amanjon-         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:38:07 by amanjon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_check_command(char *cmd)
 {
-	if (cmd[0] == '.' || cmd[0] == '/') //RODRI /-->ruta absoluta
-	{									//		.-->ruta relativa ?¿?¿?¿?
+	if (cmd[0] == '.' || cmd[0] == '/')
+	{							
 		if (access(cmd, X_OK) == 0)
 			return (1);
 		else
 		{
 			perror(cmd);
-			exit (127);
+			exit (STDERR_FILENO);
 		}
 	}
 	return (0);
@@ -99,21 +99,19 @@ void	ft_comand_child1(t_process process, char **argv, char **env)
 void	ft_commands_childs(t_process process, char **argv, char **env)
 {
 	process.pid1 = fork();
-	printf("pid1->%d\n", process.pid1);
 	if (process.pid1 < 0)
 	{
-		perror("Error: fork()\n");
-		exit(1);
+		perror("Error: fork() pid1\n");
+		exit(STDERR_FILENO);
 	}
 	else if (process.pid1 == 0)
 		ft_comand_child1(process, argv, env);
 	process.pid2 = fork();
 	if (process.pid2 < 0)
 	{
-		perror("Error: fork()\n");
-		exit(1);
+		perror("Error: fork()pid2\n");
+		exit(STDERR_FILENO);
 	}
 	else if (process.pid2 == 0)
-	printf("pid2->%d\n", process.pid2);
 		ft_comand_child2(process, argv, env);
 }
