@@ -6,17 +6,16 @@
 #    By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 09:03:02 by amanjon-          #+#    #+#              #
-#    Updated: 2023/09/05 07:59:17 by amanjon-         ###   ########.fr        #
+#    Updated: 2023/09/07 11:02:31 by amanjon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I /libft/ft_printf/include -I /libft/gnl/include -I /libft/Libft/include
-DEBUG =#-g3 -fsanitize=address
+DEBUG = -g3 -fsanitize=address
 RM = rm -f
 SRC = main.c command.c
-SRC_BONUS = main_bonus.c
 
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a

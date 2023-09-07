@@ -6,7 +6,7 @@
 /*   By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 12:50:28 by amanjon-          #+#    #+#             */
-/*   Updated: 2023/09/05 12:03:24 by amanjon-         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:03:01 by amanjon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_get_path(char **env)
 	i = 0;
 	while (env[i])
 	{
-	
 		if (ft_strncmp("PATH=", env[i], 5) == 0)
 			return (env[i] + 5);
 		i++;
@@ -70,7 +69,7 @@ void	ft_open_files(char **argv, t_process *process)
 		exit(STDERR_FILENO);
 	}
 	process->outfile = open(argv[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
-	if (access(argv[4], W_OK /* | R_OK */) < 0)
+	if (access(argv[4], W_OK) < 0)
 	{
 		perror(argv[4]);
 		exit(STDERR_FILENO);
@@ -82,27 +81,24 @@ void	ft_open_files(char **argv, t_process *process)
 	}
 }
 
-/* void	leaks(void)
-{
-	system("leaks -q pipex");
-} */
-
 int	main(int argc, char **argv, char **env)
 {
 	t_process	process;
-	
+
 	if (argc != 5)
+	{
 		perror("Error: number of wrong arguments (5)\n");
+		return (1);
+	}
 	ft_open_files(argv, &process);
 	pipe(process.fd);
-	process.path = ft_get_path(env);					//usr/bin:/usr/sbin:
-	process.split_path = ft_split(process.path, ':'); // /usr/bin     /usr/sbin
+	process.path = ft_get_path(env);
+	process.split_path = ft_split(process.path, ':');
 	ft_commands_childs(process, argv, env);
 	close(process.fd[WRITE]);
 	close(process.fd[READ]);
-	
-	/* atexit(leaks); */
-
+	close(process.infile);
+	close(process.outfile);
 	waitpid(process.pid1, NULL, 0);
 	waitpid(process.pid2, NULL, 0);
 	ft_free_father(&process);
