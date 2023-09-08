@@ -6,7 +6,7 @@
 /*   By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 12:50:28 by amanjon-          #+#    #+#             */
-/*   Updated: 2023/09/07 11:03:01 by amanjon-         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:45:37 by amanjon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ void	ft_free_father(t_process *process)
 	int	i;
 
 	i = 0;
-	while (process->split_path[i])
+	if (process->split_path != NULL)
 	{
-		free(process->split_path[i]);
-		i++;
+		while (process->split_path[i])
+		{
+			free(process->split_path[i]);
+			i++;
+		}
+		free(process->split_path);
+		close(process->infile);
+		close(process->outfile);
 	}
-	close(process->infile);
-	close(process->outfile);
-	free(process->split_path);
 }
 
 void	ft_free_childs(t_process *process)
@@ -61,23 +64,23 @@ void	ft_open_files(char **argv, t_process *process)
 	if (access(argv[1], R_OK) < 0)
 	{
 		perror(argv[1]);
-		exit(STDERR_FILENO);
+		exit(errno);
 	}
 	if (process->infile < 0)
 	{
 		perror("Error: don't open properly infile\n");
-		exit(STDERR_FILENO);
+		exit(2);
 	}
 	process->outfile = open(argv[4], O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	if (access(argv[4], W_OK) < 0)
 	{
 		perror(argv[4]);
-		exit(STDERR_FILENO);
+		exit(2);
 	}
 	if (process->outfile < 0)
 	{
 		perror("Error: don't open properly outfile\n");
-		exit(STDERR_FILENO);
+		exit(2);
 	}
 }
 
@@ -90,10 +93,12 @@ int	main(int argc, char **argv, char **env)
 		perror("Error: number of wrong arguments (5)\n");
 		return (1);
 	}
+	process.split_path = NULL;
 	ft_open_files(argv, &process);
 	pipe(process.fd);
 	process.path = ft_get_path(env);
-	process.split_path = ft_split(process.path, ':');
+	if (process.path != NULL)
+		process.split_path = ft_split(process.path, ':');
 	ft_commands_childs(process, argv, env);
 	close(process.fd[WRITE]);
 	close(process.fd[READ]);
