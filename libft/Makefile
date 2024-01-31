@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 12:50:11 by amanjon-          #+#    #+#              #
-#    Updated: 2023/08/02 12:53:34 by amanjon-         ###   ########.fr        #
+#    Updated: 2024/01/31 12:30:13 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIB = ar rcs
 NAME = libft.a
 cc = gcc
-CFLAGS = -Wall -Wextra -Werror -I ./include -I ./ft_printf/include -I ./gnl/include 
+CFLAGS = -Wall -Wextra -Werror -I ./Libft/include -I ./ft_printf/include -I ./Gnl/include 
 RM = rm -f 
 
 LIBFT = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlcat.c ft_strlcpy.c\
@@ -24,9 +24,9 @@ ft_itoa.c ft_split.c ft_putchar.c
 FT_PRINTF = ft_hexad_len.c ft_itoa_unsg.c ft_itoa.c ft_print_hexad_x.c ft_print_pointer.c ft_printf.c ft_putchar.c ft_putstr.c ft_putstr_free.c ft_putchar_ft_printf.c
 GNL =  get_next_line.c  get_next_line_utils.c
 
-SRC1_DIR	=	./libft/src/
+SRC1_DIR	=	./Libft/src/
 SRC2_DIR	=	./ft_printf/src/
-SRC3_DIR	=	./gnl/src/
+SRC3_DIR	=	./Gnl/src/
 
 SRC1	=	$(addprefix $(SRC1_DIR), $(LIBFT))
 SRC2	=	$(addprefix $(SRC2_DIR), $(FT_PRINTF))

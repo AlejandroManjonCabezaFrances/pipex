@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amanjon- <amanjon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 09:03:02 by amanjon-          #+#    #+#              #
-#    Updated: 2023/09/07 11:02:31 by amanjon-         ###   ########.fr        #
+#    Updated: 2024/01/31 12:26:59 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I /libft/ft_printf/include -I /libft/gnl/include -I /libft/Libft/include
+CFLAGS = -Wall -Wextra -Werror -I /libft/ft_printf/include -I /libft/Gnl/include -I /libft/Libft/include
 DEBUG = -g3 -fsanitize=address
 RM = rm -f
 SRC = main.c command.c
